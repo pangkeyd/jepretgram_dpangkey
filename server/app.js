@@ -24,10 +24,12 @@ app.use(bodyParser.json())
 // ROUTES
 
 const signup = require('./routers/signup')
+const signin = require('./routers/signin')
+const gallery = require('./routers/index')
 
 app.use('/signup', signup)
-
-// app.use('/signup', signup)
+app.use('/signin', signin)
+app.use('/', gallery)
 
 app.listen(process.env.PORT_DEF , () => {
   console.log('AYO JALAN!')

@@ -21,29 +21,23 @@ function getUser(cb){
 }
 
 function signUp(body, cb){
-  User.find({
-    fbID: body.fbID
-  }, (err, user) => {
-    console.log(user)
-    if(user.length > 0){
-      let userSchema = new User({
-        fbID: body.fbID,
-        name: body.name,
-        email: body.email
-      })
-      userSchema.save((error, users) => {
-        if(!error){
-          cb(users, null)
-        }else if(error.message.indexOf('fbID_1') !== -1){
-          let error = 'Fb Id already used!'
-          cb(null, error)
-        }
-      })
+  let userSchema = new User({
+    fbID: body.fbID,
+    name: body.name,
+    email: body.email
+  })
+  userSchema.save((error, users) => {
+    if(!error){
+      cb(users, null)
+    }else if(error.message.indexOf('fbID_1') !== -1){
+      let errors = 'Fb Id already used!'
+      cb(null, errors)
     }
   })
 }
 
 module.exports = {
+  User,
   getUser,
   signUp
 }
