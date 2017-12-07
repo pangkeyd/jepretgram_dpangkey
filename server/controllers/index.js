@@ -17,6 +17,24 @@ class Gallery {
     })
   }
 
+  static postGallery(req, res){
+    gallery.postGallery(req.headers, req.body, req.file, (result) => {
+      res.send(result)
+    })
+  }
+
+  static editCaption(req, res){
+    gallery.editCaption(req.headers, req.params, req.body, (result) => {
+      res.send(result)
+    })
+  }
+
+  static deleteData(req, res){
+    gallery.deleteGallery(req.params, (result) => {
+      res.send(result)
+    })
+  }
+
 }
 
 module.exports = Gallery
